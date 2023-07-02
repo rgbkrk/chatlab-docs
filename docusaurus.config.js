@@ -21,6 +21,9 @@ const config = {
   organizationName: "rgbkrk", // Usually your GitHub org/user name.
   projectName: "chatlab", // Usually your repo name.
 
+  deploymentBranch: "gh-pages",
+  trailingSlash: false,
+
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
