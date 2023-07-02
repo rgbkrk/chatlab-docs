@@ -11,25 +11,20 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: "Ease of Experimentation",
-    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    Svg: require("@site/static/img/streaming_notebook.svg").default,
     description: (
       <>Experiment easily with OpenAI's chat models and your own functions.</>
     ),
   },
   {
     title: "Chat Functions",
-    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    Svg: require("@site/static/img/function_chat.svg").default,
     description: <>Bring the full power of Python to chat.</>,
   },
   {
     title: "Notebook Integration",
-    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
-    description: (
-      <>
-        Enjoy streaming Markdown output, interactive function UI, and rapid
-        iteration.
-      </>
-    ),
+    Svg: require("@site/static/img/streaming_notebook.svg").default,
+    description: <>Stream chat straight to your notebook.</>,
   },
 ];
 
