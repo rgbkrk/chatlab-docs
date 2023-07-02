@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkchatlab_docs=self.webpackChunkchatlab_docs||[]).push([[121],{3233:a=>{a.exports=JSON.parse('{"permalink":"/blog/tags/chatlab","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

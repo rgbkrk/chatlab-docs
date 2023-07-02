@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkchatlab_docs=self.webpackChunkchatlab_docs||[]).push([[713],{3457:a=>{a.exports=JSON.parse('[{"label":"hola","permalink":"/blog/tags/hola","count":1},{"label":"chatlab","permalink":"/blog/tags/chatlab","count":1}]')}}]);
