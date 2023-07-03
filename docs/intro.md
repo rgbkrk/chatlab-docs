@@ -38,7 +38,7 @@ There are many ways to set the `OPENAI_API_KEY` both securely and insecurely. Le
 
 ## First Example ⚽️
 
-```python
+```python cell executionCount=1
 from chatlab import system, Conversation, user
 import random
 
