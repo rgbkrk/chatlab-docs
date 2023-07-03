@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import classNames from "classnames";
+import clsx from "clsx";
 
 import ExecutionCount from "./execution-count";
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Block = ({ count, children, type }) => {
-  const contentWrapperClass = classNames(styles.cellContentWrapper, {
+  const contentWrapperClass = clsx(styles.cellContentWrapper, {
     // We rely on the fact that the <CodeBlock /> component already has
     // padding, so we don't add any here.
     // [styles.cellContentWrapperInput]: type === "input",

@@ -1,6 +1,7 @@
+import clsx from "clsx";
 import React from "react";
+
 import styles from "./styles.module.css";
-import classNames from "classnames";
 
 type Props = {
   count: number | string;
@@ -14,7 +15,7 @@ const ExecutionCount: React.FC<Props> = ({ count, type }) => {
     counterText = `[${count}]:`;
   }
 
-  const executionCountClass = classNames(styles.executionCount, {
+  const executionCountClass = clsx(styles.executionCount, {
     [styles.executionCountInput]: type === "input",
     [styles.executionCountOutput]: type === "output",
   });
