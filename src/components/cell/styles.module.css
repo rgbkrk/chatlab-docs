@@ -1,0 +1,54 @@
+.executionCount {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  color: #a7a7a7;
+  font-size: var(--ifm-code-font-size);
+  margin-top: var(--ifm-pre-padding);
+  margin-right: var(--ifm-pre-padding);
+  line-height: var(--ifm-pre-line-height);
+  min-width: 3rem;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  /* user-select: none; */
+}
+
+.cellWrapper {
+  display: flex;
+  align-items: flex-start;
+  /* padding: 1rem; */
+}
+
+.cellContentWrapper {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.cellContentWrapperOutput {
+  /* padding: var(--ifm-pre-padding); */
+  padding-top: var(--ifm-pre-padding);
+
+  color: var(--ifm-font-color-base);
+  background-color: var(--ifm-background-color);
+
+  --prism-background-color: var(--ifm-background-color);
+  --prism-color: var(--ifm-font-color-base);
+}
+
+.cellContentWrapperOutput pre {
+  padding: 0;
+
+  /* color: var(--ifm-font-color-base); */
+  background-color: var(--ifm-background-color);
+
+  --prism-background-color: var(--ifm-background-color);
+  --prism-color: var(--ifm-font-color-base);
+}
+
+.executionCountInput {
+  color: #307fc1;
+}
+
+.executionCountOutput {
+  color: #bf5b3d;
+}
