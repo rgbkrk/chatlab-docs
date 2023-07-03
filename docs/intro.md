@@ -42,7 +42,7 @@ There are many ways to set the `OPENAI_API_KEY` both securely and insecurely. Le
 
 Let's play a game of soccer. We'll write a function to flip a coin to determine who gets the first move. The assistant gets to be the referee.
 
-```python cell executionCount=1
+```python cell count=1
 from chatlab import system, Conversation, user
 import random
 
@@ -98,13 +98,11 @@ Output:
 
 To understand what's going on, let's break down the individual `Message`s from `conversation.messages`:
 
-```python cell executionCount=2
+```python cell count=2
 conversation.messages
 ```
 
-<OutputBlock count="2">
-
-```json mediaType=text/plain
+```js output count=2
 { role: "system", content: "Form responses in Markdown and use emojis." },
 
 { role: "system", content: "## INT. SOCCER FIELD - DAY\n\n**REF**, an experienced official with a firm command of the ⚽️ game, steps forward holding a shining silver coin. The coin that will determine the first move in the game. The home team captain steps up." },
@@ -118,8 +116,6 @@ conversation.messages
 { role: "assistant", content: "It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼", function_call: None, },
 ```
 
-</OutputBlock>
-
 The four roles in a conversation are:
 
 - `system` - The system is like a narrator to inform the AI of the context of the conversation. They set the scene and steer the model.
@@ -131,15 +127,19 @@ The four roles in a conversation are:
 
 Any function with typed arguments can be registered quickly in a conversation. Registering the function will allow the `assistant` to call it during the conversation.
 
-```python
+```python cell count=3
 conversation.register(flip_a_coin)
 ```
 
-```json
+```json output count=3
 {
   "name": "flip_a_coin",
   "description": "Returns heads or tails",
-  "parameters": { "type": "object", "properties": {}, "required": [] }
+  "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  }
 }
 ```
 
@@ -147,13 +147,15 @@ Under the hood, ChatLab inspects your function and generates a JSON Schema for i
 
 ### Submitting Messages
 
-Every time you run `submit`, ChatLab sends the conversation to the assistant and returns the response. The response is a `Message` with the `role` of `assistant`.
+Every time you run `submit`, ChatLab sends the conversation to the assistant and returns the response. The response is a `Message` with the `role` of `assistant`. If we wanted to create this message ourselves, we can run:
 
-```python
-conversation.submit("**Kai**: We call tails.")
+```python cell count=4
+from chatlab.messaging import assistant_function_call
+
+assistant_function_call("flip_a_coin", arguments="{}")
 ```
 
-```json
+```json output count=4
 {
   "role": "assistant",
   "content": null,
@@ -167,7 +169,13 @@ The `content` is `null` because the assistant has decided to call a function. Th
 
 When the assistant calls a function, `chatlab` sends back a `Message` with the role `function`. The `content` is the return value of the function.
 
-```json
+```python cell count=5
+from chatlab.messaging import function_result
+
+function_result(content="tails", name="flip_a_coin")
+```
+
+```json output count=5
 {
   "role": "function",
   "content": "tails",

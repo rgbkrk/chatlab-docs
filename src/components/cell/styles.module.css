@@ -25,20 +25,7 @@
 }
 
 .cellContentWrapperOutput {
-  /* padding: var(--ifm-pre-padding); */
-  padding-top: var(--ifm-pre-padding);
-
-  color: var(--ifm-font-color-base);
-  background-color: var(--ifm-background-color);
-
-  --prism-background-color: var(--ifm-background-color);
-  --prism-color: var(--ifm-font-color-base);
-}
-
-.cellContentWrapperOutput pre {
-  padding: 0;
-
-  /* color: var(--ifm-font-color-base); */
+  padding-top: 1rem;
   background-color: var(--ifm-background-color);
 
   --prism-background-color: var(--ifm-background-color);
