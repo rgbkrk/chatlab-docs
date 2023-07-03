@@ -2,6 +2,8 @@
 sidebar_position: 1
 ---
 
+import { OutputBlock } from "@site/src/components/cell";
+
 # Get Started
 
 With ChatLab, you can augment Large Language Models _with computational powers_ quickly.
@@ -36,9 +38,11 @@ There are many ways to set the `OPENAI_API_KEY` both securely and insecurely. Le
 
 :::
 
-## First Example ⚽️
+## Your First Soccer Game ⚽️ {#first-example}
 
-```python
+Let's play a game of soccer. We'll write a function to flip a coin to determine who gets the first move. The assistant gets to be the referee.
+
+```python cell executionCount=1
 from chatlab import system, Conversation, user
 import random
 
@@ -46,29 +50,32 @@ def flip_a_coin():
     '''Returns heads or tails'''
     return random.choice(['heads', 'tails'])
 
+# Setup the conversation by writing an initial screenplay
+game_intro = '''
+## INT. SOCCER FIELD - DAY
+
+**REF**, an experienced official with a firm command of the ⚽️ game, steps forward holding a shining silver coin. The coin that will determine the first move in the game. The home team captain steps up.
+'''
+
 conversation = Conversation(
   system("Form responses in Markdown and use emojis."),
-  system(
-      "## INT. SOCCER FIELD - DAY\n\n"
-      "**REF**, an experienced official with a firm command of the ⚽️ game, "
-      "steps forward holding a shining silver coin. The coin that will "
-      "determine the first move in the game. The home team captain steps up."
-  )
+  system(game_intro),
 )
 conversation.register(flip_a_coin)
 
 conversation.submit("**Kai**: We call tails.")
 ```
 
-<details style={{
-  background: '#DDE6ED',
-  color: '#27374D',
-  padding: '.5rem 1rem',
-  borderRadius: '5px',
-}}>
+<OutputBlock count="1">
+  <details style={{
+    background: '#DDE6ED',
+    color: '#27374D',
+    padding: '.5rem 1rem',
+    borderRadius: '5px',
+  }}>
 
-<summary>&nbsp;𝑓&nbsp; Ran `flip_a_coin`
-</summary>
+  <summary>&nbsp;𝑓&nbsp; Ran `flip_a_coin`
+  </summary>
 
 Input:
 
@@ -82,30 +89,36 @@ Output:
 "tails"
 ```
 
-</details>
+  </details>
 
-> **REF**: It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼
+**REF**: It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼
+</OutputBlock>
 
 ### Roles of a Conversation
 
 To understand what's going on, let's break down the individual `Message`s from `conversation.messages`:
 
-```json
-[{'role': 'system', 'content': 'Form responses in Markdown and use emojis.'},
- {'role': 'system',
-  'content': '## INT. SOCCER FIELD - DAY\n\n**REF**, an experienced official with a firm command of the ⚽️ game, steps forward holding a shining silver coin. The coin that will determine the first move in the game. The home team captain steps up.'},
- {'role': 'user', 'content': '**Kai**: We call tails.'},
- {'role': 'assistant',
-  'content': None,
-  'function_call': {'name': 'flip_a_coin', 'arguments': '{}'}},
- {'role': 'function', 'content': 'tails', 'name': 'flip_a_coin'},
- {'role': 'assistant',
-  'content': 'It\'s tails! The first move goes to the home team. Good luck to both teams! Let\'s begin the game! ⚽️👍🏼',
-  'function_call': None}
-]
+```python cell executionCount=2
+conversation.messages
 ```
 
-<!-- Note: the assistant is the AI, system is a message only the AI can see -- it's like a facilitator, user is obviously a user -->
+<OutputBlock count="2">
+
+```json mediaType=text/plain
+{ role: "system", content: "Form responses in Markdown and use emojis." },
+
+{ role: "system", content: "## INT. SOCCER FIELD - DAY\n\n**REF**, an experienced official with a firm command of the ⚽️ game, steps forward holding a shining silver coin. The coin that will determine the first move in the game. The home team captain steps up." },
+
+{ role: "user", content: "**Kai**: We call tails." },
+
+{ role: "assistant", content: None, function_call: { name: "flip_a_coin", arguments: "{}" }, },
+
+{ role: "function", content: "tails", name: "flip_a_coin" },
+
+{ role: "assistant", content: "It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼", function_call: None, },
+```
+
+</OutputBlock>
 
 The four roles in a conversation are:
 
