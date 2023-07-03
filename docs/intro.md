@@ -38,7 +38,7 @@ There are many ways to set the `OPENAI_API_KEY` both securely and insecurely. Le
 
 :::
 
-## Your First Soccer Game ⚽️
+## Your First Soccer Game ⚽️ {#intro-example}
 
 Let's play a game of soccer. We'll write a function to flip a coin to determine who gets the first move. The assistant gets to be the referee.
 
