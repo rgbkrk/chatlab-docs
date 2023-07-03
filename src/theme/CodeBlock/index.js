@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import { InputBlock, OutputBlock } from "@site/src/components/cell";
@@ -36,7 +36,7 @@ export default function CodeBlockWrapper(props) {
   // Handle basic plaintext outputs in a friendly way for JSON outputs
   if (props.output) {
     // HACK: Allow the CodeBlockContainer to know this is an output block
-    const className = classNames(props.className, "chatlab-cell-output");
+    const className = clsx(props.className, "chatlab-cell-output");
 
     return (
       <OutputBlock count={count}>
