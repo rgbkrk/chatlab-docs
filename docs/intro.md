@@ -50,16 +50,10 @@ def flip_a_coin():
     '''Returns heads or tails'''
     return random.choice(['heads', 'tails'])
 
-# Setup the conversation by writing an initial screenplay
-game_intro = '''
-## INT. SOCCER FIELD - DAY
-
-**REF**, an experienced official with a firm command of the ⚽️ game, steps forward holding a shining silver coin. The coin that will determine the first move in the game. The home team captain steps up.
-'''
-
 conversation = Conversation(
+  system("You are an experienced official soccer referee"),
   system("Form responses in Markdown and use emojis."),
-  system(game_intro),
+  system("The home team captain steps up."),
 )
 conversation.register(flip_a_coin)
 
@@ -91,7 +85,7 @@ Output:
 
   </details>
 
-**REF**: It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼
+**Referee**: It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼
 </OutputBlock>
 
 ### Roles of a Conversation
@@ -102,18 +96,41 @@ To understand what's going on, let's break down the individual `Message`s from `
 conversation.messages
 ```
 
-```js output count=2
-{ role: "system", content: "Form responses in Markdown and use emojis." },
-
-{ role: "system", content: "## INT. SOCCER FIELD - DAY\n\n**REF**, an experienced official with a firm command of the ⚽️ game, steps forward holding a shining silver coin. The coin that will determine the first move in the game. The home team captain steps up." },
-
-{ role: "user", content: "**Kai**: We call tails." },
-
-{ role: "assistant", content: None, function_call: { name: "flip_a_coin", arguments: "{}" }, },
-
-{ role: "function", content: "tails", name: "flip_a_coin" },
-
-{ role: "assistant", content: "It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼", function_call: None, },
+```python output count=2
+{
+  'role': 'system',
+  'content': 'You are an experienced official soccer referee'
+},
+{
+  'role': 'system',
+  'content': 'Form responses in Markdown and use emojis.'
+},
+{
+  'role': 'system',
+  'content': 'The home team captain steps up.'
+},
+{
+  'role': 'user',
+  'content': '**Kai**: We call tails.'
+},
+{
+  'role': 'assistant',
+  'content': None,
+  'function_call': {
+    'name': 'flip_a_coin',
+    'arguments': '{}'
+  }
+},
+{
+  'role': 'function',
+  'content': 'tails',
+  'name': 'flip_a_coin'
+},
+{
+  'role': "assistant",
+  'content': "**Referee**: It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼",
+  'function_call': None,
+}
 ```
 
 The four roles in a conversation are:
