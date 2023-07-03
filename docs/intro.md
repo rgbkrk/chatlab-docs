@@ -62,8 +62,8 @@ conversation.submit("**Kai**: We call tails.")
 
 <OutputBlock count="1">
   <details style={{
-    background: '#DDE6ED',
-    color: '#27374D',
+    background: 'var(--ifm-alert-background-color)',
+    color: 'var(--ifm-alert-text-color)',
     padding: '.5rem 1rem',
     borderRadius: '5px',
   }}>
