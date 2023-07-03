@@ -140,6 +140,15 @@ The four roles in a conversation are:
 - `assistant` - The assistant is the model, the AI, it's who `user`s are talking to.
 - `function` - The result of a function call in response to the `assistant` requesting a `function_call`.
 
+:::note
+
+`system` is controlled by _you_. Use it to:
+
+- Set the tone of the assistant
+- Inform the assistant of conditions
+
+:::
+
 ### Registering Functions
 
 Any function with typed arguments can be registered quickly in a conversation. Registering the function will allow the `assistant` to call it during the conversation.
