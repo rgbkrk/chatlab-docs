@@ -1,6 +1,7 @@
 ---
 title: Setting API Keys
 description: How to set your API keys for OpenAI and ChatLab
+sidebar_position: 2
 ---
 
 # Setting API Keys
