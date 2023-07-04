@@ -19,8 +19,9 @@ conversation.register(run_cell)
 conversation.submit("Please calculate sin(793.1)")
 ```
 
-<OutputBlock>
+<OutputBlock count={1}>
   <ChatFunctionCall
+    open
     name="run_cell"
     input={'{\n  "code": "import math\\nmath.sin(793.1)"\n}'}
     output="0.9884482539459452"
@@ -31,7 +32,7 @@ conversation.submit("Please calculate sin(793.1)")
 
 You can let ChatGPT take on a data persona with a `system` message and then have it work with `DataFrame`s you have in memory.
 
-```python cell count=1
+```python
 from chatlab import Conversation, system
 from chatlab.builtins import run_cell
 import pandas as pd
@@ -51,8 +52,24 @@ conversation.submit("Please tell me about what's in `df`")
 
 ## The hidden `python` hallucination
 
-Sometimes GPT models will hallucinate a `python` tool that accepts a single string rather than the proper JSON object that `run_cell` requests.
+Sometimes GPT models will hallucinate a `python` tool that accepts a single string rather than the proper JSON object that `run_cell` requests. You can include it in your `Conversation` to handle these cases.
 
+```python cell count=1
+from chatlab import Conversation
+from chatlab.builtins import run_cell
+
+conversation = Conversation(
+    allow_hallucinated_python=True
+)
+conversation.register(run_cell)
+conversation.submit("Please calculate sin(793.1)")
 ```
 
-```
+<OutputBlock count={3}>
+  <ChatFunctionCall
+    open
+    name="python"
+    input={"import math\nmath.sin(793.1)"}
+    output="0.9884482539459452"
+  />
+</OutputBlock>
