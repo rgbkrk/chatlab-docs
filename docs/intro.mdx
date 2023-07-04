@@ -2,6 +2,7 @@
 sidebar_position: 1
 ---
 
+import ChatFunctionCall from "@site/src/components/ChatFunctionCall";
 import { OutputBlock } from "@site/src/components/cell";
 
 # Get Started
@@ -61,29 +62,11 @@ conversation.submit("**Kai**: We call tails.")
 ```
 
 <OutputBlock count="1">
-  <details style={{
-    background: 'var(--ifm-alert-background-color)',
-    color: 'var(--ifm-alert-text-color)',
-    padding: '.5rem 1rem',
-    borderRadius: '5px',
-  }}>
-
-  <summary>&nbsp;𝑓&nbsp; Ran `flip_a_coin`
-  </summary>
-
-Input:
-
-```json
-{}
-```
-
-Output:
-
-```json
-"tails"
-```
-
-  </details>
+  <ChatFunctionCall
+    name="flip_a_coin"
+    input="{}"
+    output='"tails"'
+  />
 
 **Referee**: It's tails! The first move goes to the home team. Good luck to both teams! Let's begin the game! ⚽️👍🏼
 </OutputBlock>
