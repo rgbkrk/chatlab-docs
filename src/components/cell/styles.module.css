@@ -91,13 +91,14 @@
 
   .cellContentWrapperOutput {
     padding-top: var(--ifm-pre-padding);
-    /* border: 1px solid var(--ifm-pre-background); */
+    /** Color comes from prism background on light theme */
     border: 2px solid #f6f8fa;
-    /* border: 1px solid #ffe6e6; */
     padding: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   [data-theme="dark"] .cellContentWrapperOutput {
+    /** Color comes from prism background on dark theme */
     border: 1px solid #282a36;
   }
 }
