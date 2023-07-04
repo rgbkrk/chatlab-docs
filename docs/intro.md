@@ -185,7 +185,10 @@ assistant_function_call("flip_a_coin", arguments="{}")
 {
   "role": "assistant",
   "content": null,
-  "function_call": { "name": "flip_a_coin", "arguments": "{}" }
+  "function_call": {
+    "name": "flip_a_coin",
+    "arguments": "{}"
+  }
 }
 ```
 

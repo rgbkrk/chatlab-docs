@@ -39,3 +39,54 @@
 .executionCountOutput {
   color: #bf5b3d;
 }
+
+/* Styles for screens smaller than 600px */
+@media (max-width: 600px) {
+  .executionCount {
+    /* font-size: calc(var(--ifm-code-font-size) * 0.8); */
+    min-width: 2rem;
+
+    border: 1px solid var(--ifm-border-color);
+    padding: 0.2rem 0.5rem;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    margin-right: 0.5rem;
+  }
+
+  .executionCountInput {
+    background-color: #e0f0ff;
+    color: #307fc1;
+  }
+
+  .executionCountOutput {
+    /* background-color: #ffe6e6; */
+    background-color: #f6f6f6;
+    color: #513131;
+    /* color: #bf5b3d; */
+  }
+
+  .executionCountInput::before {
+    content: "In";
+  }
+
+  .executionCountOutput::before {
+    content: "Out";
+  }
+
+  .cellWrapper {
+    flex-direction: column; /* stacks the flex items vertically */
+  }
+
+  .cellContentWrapper {
+    width: 100%; /* takes up the full width */
+  }
+
+  .cellContentWrapperOutput {
+    padding-top: 0.5rem; /* adjust as needed */
+    border: 1px solid #f6f6f6;
+    /* border: 1px solid #ffe6e6; */
+    padding: 0.5rem;
+  }
+}
