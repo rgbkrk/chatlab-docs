@@ -39,7 +39,7 @@ There are many ways to set the `OPENAI_API_KEY` both securely and insecurely. Le
 
 :::
 
-## Your First Soccer Game ⚽️ {#first-example}
+## First Chat ⚽️ {#first-example}
 
 Let's play a game of soccer. We'll write a function to flip a coin to determine who gets the first move. The assistant gets to be the referee.
 
@@ -72,9 +72,11 @@ conversation.submit("**Kai**: We call tails.")
 
 </OutputBlock>
 
-### Roles of a Conversation
+## Conversation Roles
 
-To understand what's going on, let's break down each individual `Message` from `conversation.messages`:
+In the above example, we used the `system` function to create a `Message` for the assistant to interpret. We also implicitly created user `Message`s. These are the two most common roles in a conversation you will use directly. ChatLab captures not just these messages. It also captures responses from the assistant and function calls.
+
+To understand what transpired above, let's look at each `Message` from `conversation.messages`:
 
 ```python cell count=2
 conversation.messages
@@ -117,12 +119,23 @@ conversation.messages
 }
 ```
 
-The four roles in a conversation are:
+As you can see, there are four roles in a conversation. Let's break those down.
 
-- `system` - The system is like a narrator to inform the AI of the context of the conversation. They set the scene and steer the model.
-- `user` - The user is you, the human, the person, the player, etc.
-- `assistant` - The assistant is the model, the AI, it's who `user`s are talking to.
-- `function` - The result of a function call in response to the `assistant` requesting a `function_call`.
+### `user`
+
+The user is you, the human, the person, the player, etc.
+
+### `assistant`
+
+The assistant is the Artificial Intelligence (the AI). People colloquially call it "the model" as a shortening of Large Language Model (LLM). The assistant creates messages for display to the user as well as requests to call functions.
+
+### `function`
+
+The result of a function call is sent with role `function` from chatlab. The `content` is the return value of the function.
+
+### `system`
+
+The system role sets the scene and steers the conversation. Think of it like a background narrator to inform the AI of the context of the conversation.
 
 :::note
 
@@ -131,9 +144,11 @@ The four roles in a conversation are:
 - Set the tone of the assistant
 - Inform the assistant of conditions
 
+The assistant _tends_ to assume it is part of the overall system and is responsible for communicating with the user.
+
 :::
 
-### Registering Functions
+## Registering Functions
 
 Any function with typed arguments can be registered quickly in a conversation. Registering the function will allow the `assistant` to call it during the conversation.
 
@@ -155,17 +170,30 @@ conversation.register(flip_a_coin)
 
 Under the hood, ChatLab inspects your function and generates a JSON Schema for it. This schema is used to validate the arguments the assistant sends to your function.
 
-### Submitting Messages
+## Submitting Messages
 
-Every time you run `submit`, ChatLab sends the conversation to the assistant and returns the response. The response is a `Message` with the `role` of `assistant`. If we wanted to create this message ourselves, we can run:
+Every time you run `submit`, ChatLab sends the conversation to the assistant and returns the response. The response is a `Message` with the `role` of `assistant`. Assistant messages can either have `content` or a `function_call`. The `content` is the text the assistant wants to send to the user. When `function_call` is set, the assistant is requesting to run a function.
 
 ```python cell count=4
+from chatlab.messaging import assistant
+
+assistant("Let's play ball!")
+```
+
+```json output count=4
+{
+  "role": "assistant",
+  "content": "Let's play ball!"
+}
+```
+
+```python cell count=5
 from chatlab.messaging import assistant_function_call
 
 assistant_function_call("flip_a_coin", arguments="{}")
 ```
 
-```json output count=4
+```json output count=5
 {
   "role": "assistant",
   "content": null,
@@ -178,7 +206,7 @@ assistant_function_call("flip_a_coin", arguments="{}")
 
 The `content` is `null` because the assistant has decided to call a function. The `arguments` are empty because `flip_a_coin` doesn't take any arguments.
 
-### Calling Functions
+## Calling Functions
 
 When the assistant calls a function, `chatlab` sends back a `Message` with the role `function`. The `content` is the return value of the function.
 
